@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="elevation">2dp</dimen>
+    <dimen name="padding">8dp</dimen>
+    <dimen name="box_size">170dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+</resources>

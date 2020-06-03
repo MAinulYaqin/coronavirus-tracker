@@ -1,0 +1,64 @@
+
+=== API ===
+
+BASE_URL = https://api.covid19api.com/
+
+// model country
+COUNTRY = {
+	"Country": "Indonesia",
+	"Slug":	"indonesia"
+	"ISO2": "ID"
+}
+
+// summary of total cases
+// content : { Global: {...}, Countries: {...} }
+SUMMARY = /summary
+
+// return total cases from day one - current time
+TOTAL = total/dayone/country/:country-Slug
+
+
+=== STRINGS ===
+
+S = SEMBUH
+K = KASUS
+A = AKTIF
+M = MENINGGAL
+
+
+
+=== MPCHART ===
+
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+}
+
+
+=== COLORS === 
+
+COVER = #212b46
+BACKGROUND = #fefefe
+BOXES = #f9fafc
+
+BLUE_DARK = #017bfc
+BLUE = #69b1f9
+
+
+RED_DARK = #f6423d
+RED = #f67193
+
+
+GREEN_DARK = #429d48
+GREEN = #80ca8f
+
+GREY_DARK = #6c757d
+GREY = #a7acb2
+
+ -- FONTS
+    header = #202d3d
+    grey = #8d96a8
+    grey2 = #242c37
