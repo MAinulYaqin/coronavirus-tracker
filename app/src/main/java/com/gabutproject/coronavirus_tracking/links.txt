@@ -1,0 +1,107 @@
+
+=== API ===
+
+BASE_URL = https://api.covid19api.com/
+
+// model country
+COUNTRY = {
+	"Country": "Indonesia",
+	"Slug":	"indonesia"
+	"ISO2": "ID"
+}
+
+// summary of total cases
+// content : { Global: {...}, Countries: {...} }
+SUMMARY = /summary
+
+// return total cases from day one - current time
+TOTAL = total/dayone/country/:country-Slug
+
+
+=== STRINGS ===
+
+S = SEMBUH
+K = KASUS
+A = AKTIF
+M = MENINGGAL
+
+
+
+=== MPCHART ===
+
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+}
+
+
+=== COLORS === 
+
+COVER = #212b46
+BACKGROUND = #fefefe
+BOXES = #f9fafc
+
+BLUE_DARK = #017bfc
+BLUE = #69b1f9
+
+
+RED_DARK = #f6423d
+RED = #f67193
+
+
+GREEN_DARK = #429d48
+GREEN = #80ca8f
+
+GREY_DARK = #6c757d
+GREY = #a7acb2
+
+ -- FONTS
+    header = #202d3d
+    grey = #8d96a8
+    grey2 = #242c37
+
+
+=== COPY ===
+
+<androidx.cardview.widget.CardView
+                android:id="@+id/aktif_card"
+                style="@style/status_card_style"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/kasus_card"
+                app:layout_constraintTop_toTopOf="@id/kasus_card">
+
+                <TextView
+                    style="@style/status_card_title_text"
+                    android:text="@string/aktif" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sembuh_card"
+                style="@style/status_card_style"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toStartOf="@id/meninggal_card"
+                app:layout_constraintStart_toStartOf="@id/kasus_card"
+                app:layout_constraintTop_toBottomOf="@id/kasus_card">
+
+                <TextView
+                    style="@style/status_card_title_text"
+                    android:text="@string/sembuh" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/meninggal_card"
+                style="@style/status_card_style"
+                android:layout_marginEnd="@dimen/margin_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/sembuh_card"
+                app:layout_constraintTop_toTopOf="@id/sembuh_card">
+
+                <TextView
+                    style="@style/status_card_title_text"
+                    android:text="@string/meninggal" />
+            </androidx.cardview.widget.CardView>

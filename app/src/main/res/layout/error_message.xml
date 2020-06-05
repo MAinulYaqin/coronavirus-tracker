@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/medium_margin"
+        tools:background="@color/header"
+        tools:layout_height="150dp">
+
+        <TextView
+            android:id="@+id/error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_connection_message"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@id/sub_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/sub_message"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/no_connection_sub_message"
+            android:textColor="@color/grey"
+            app:layout_constraintBottom_toTopOf="@id/retry_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/error_message" />
+
+        <Button
+            android:id="@+id/retry_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/greenDark"
+            android:text="@string/retry"
+            android:textAllCaps="false"
+            android:textColor="@color/background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sub_message" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
