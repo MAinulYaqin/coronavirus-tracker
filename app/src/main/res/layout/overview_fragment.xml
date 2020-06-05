@@ -61,48 +61,20 @@
                 app:layout_constraintStart_toStartOf="@id/app_name"
                 app:layout_constraintTop_toBottomOf="@id/global_status_text" />
 
-
             <include
-                android:id="@+id/kasus_card"
+                android:id="@+id/sembuh_card"
                 layout="@layout/status_card"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/box_size"
                 android:layout_marginStart="@dimen/medium_margin"
                 android:layout_marginTop="@dimen/medium_box_spaces"
                 android:layout_marginEnd="@dimen/medium_box_spaces"
-                app:layout_constraintEnd_toStartOf="@id/aktif_card"
+                app:layout_constraintEnd_toStartOf="@id/meninggal_card"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/last_update_text"
-                bind:sectionColor="@{@color/redDark}"
-                bind:titleText="@{@string/kasus}"
-                bind:totalStatus="@{viewModel.globalCases.totalConfirmed}" />
-
-            <include
-                android:id="@+id/aktif_card"
-                layout="@layout/status_card"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/box_size"
-                android:layout_marginEnd="@dimen/medium_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/kasus_card"
-                app:layout_constraintTop_toTopOf="@id/kasus_card"
-                bind:sectionColor="@{@color/blueDark}"
-                bind:titleText="@{@string/aktif}"
-                bind:totalStatus="@{viewModel.globalCases.totalConfirmed}" />
-
-            <include
-                android:id="@+id/sembuh_card"
-                layout="@layout/status_card"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/box_size"
-                android:layout_marginTop="@dimen/medium_box_spaces"
-                android:layout_marginEnd="@dimen/medium_box_spaces"
-                app:layout_constraintEnd_toStartOf="@id/meninggal_card"
-                app:layout_constraintStart_toStartOf="@id/kasus_card"
-                app:layout_constraintTop_toBottomOf="@id/kasus_card"
                 bind:sectionColor="@{@color/greenDark}"
                 bind:titleText="@{@string/sembuh}"
-                bind:totalStatus="@{viewModel.globalCases.totalRecovered}" />
+                bind:totalStatus="@{viewModel.totalGlobalCases.totalRecovered}" />
 
             <include
                 android:id="@+id/meninggal_card"
@@ -115,7 +87,22 @@
                 app:layout_constraintTop_toTopOf="@id/sembuh_card"
                 bind:sectionColor="@{@color/greyDark}"
                 bind:titleText="@{@string/meninggal}"
-                bind:totalStatus="@{viewModel.globalCases.totalDeaths}" />
+                bind:totalStatus="@{viewModel.totalGlobalCases.totalDeaths}" />
+
+            <include
+                android:id="@+id/kasus_card"
+                layout="@layout/status_card"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/box_size"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/medium_box_spaces"
+                android:layout_marginEnd="@dimen/medium_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sembuh_card"
+                bind:sectionColor="@{@color/redDark}"
+                bind:titleText="@{@string/kasus}"
+                bind:totalStatus="@{viewModel.totalGlobalCases.totalConfirmed}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"

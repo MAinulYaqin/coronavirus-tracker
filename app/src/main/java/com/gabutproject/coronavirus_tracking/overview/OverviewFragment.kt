@@ -1,9 +1,7 @@
 package com.gabutproject.coronavirus_tracking.overview
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -28,14 +26,25 @@ class OverviewFragment : Fragment() {
 
         updateLiveData()
 
+        // setup overflow menu
+        setHasOptionsMenu(true)
+        // return view
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overview_overflow_menu, menu)
+    }
+
+    // update data listener
     private fun updateLiveData() {
-        viewModel.errorRequest.observe(viewLifecycleOwner, Observer { error ->
-            error?.let {
-                Toast.makeText(context, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
-                viewModel.errorRequestCompleted()
+        // request state handler
+        viewModel.requestState.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it.status == RequestStatus.ERROR) {
+                    Toast.makeText(context, "Error: ${it.message}", Toast.LENGTH_LONG).show()
+                }
             }
         })
     }

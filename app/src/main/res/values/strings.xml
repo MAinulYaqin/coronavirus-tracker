@@ -1,9 +1,12 @@
 <resources>
-    <string name="app_name">Covid-19 Tracker</string>
+    <string name="app_name">Coronavirus Tracker</string>
 
     <string name="sembuh">SEMBUH</string>
     <string name="kasus">KASUS</string>
     <string name="aktif">AKTIF</string>
     <string name="meninggal">MENINGGAL</string>
     <string name="global">Global</string>
+    <string name="about">About</string>
+    <string name="retry">Retry</string>
+    <string name="no_connection_message">You\'re offline</string>
 </resources>

@@ -11,10 +11,10 @@
 
         <TextView
             android:id="@+id/country_name_text"
+            style="@style/item_holder_style"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:background="#EAE4E4"
-            style="@style/item_holder_style"
             app:layout_constraintEnd_toStartOf="@+id/total_cases_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -22,25 +22,17 @@
 
         <TextView
             android:id="@+id/total_cases_text"
-            app:layout_constraintEnd_toStartOf="@+id/total_active_text"
-            app:layout_constraintStart_toEndOf="@+id/country_name_text"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="176"
-            style="@style/item_holder_style" />
-
-        <TextView
-            android:id="@+id/total_active_text"
             style="@style/item_holder_style"
             app:layout_constraintEnd_toStartOf="@id/total_recovered_text"
-            app:layout_constraintStart_toEndOf="@id/total_cases_text"
+            app:layout_constraintStart_toEndOf="@id/country_name_text"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="176" />
 
         <TextView
             android:id="@+id/total_recovered_text"
             style="@style/item_holder_style"
-            app:layout_constraintEnd_toStartOf="@+id/total_deaths_text"
-            app:layout_constraintStart_toEndOf="@id/total_active_text"
+            app:layout_constraintEnd_toStartOf="@id/total_deaths_text"
+            app:layout_constraintStart_toEndOf="@id/total_cases_text"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="176" />
 
