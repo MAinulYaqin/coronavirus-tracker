@@ -9,4 +9,6 @@
     <string name="about">About</string>
     <string name="retry">Retry</string>
     <string name="no_connection_message">You\'re offline</string>
+    <string name="no_connection_sub_message">Please check your internet connection again</string>
+    <string name="dummy_last_update">Last update 1 hour ago</string>
 </resources>

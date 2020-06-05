@@ -13,7 +13,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".OverviewFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -22,44 +23,55 @@
             <View
                 android:id="@+id/header"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:background="@color/header"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/app_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/app_name"
-                android:textColor="@android:color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/global_status_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:text="@string/global"
                 android:textColor="@android:color/white"
                 android:textSize="34sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/app_name"
-                app:layout_constraintTop_toBottomOf="@id/app_name" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/last_update_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Last update 1 hour ago"
+                android:text="@string/dummy_last_update"
                 android:textColor="@color/grey"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@id/app_name"
+                app:layout_constraintStart_toStartOf="@id/global_status_text"
                 app:layout_constraintTop_toBottomOf="@id/global_status_text" />
+
+            <include
+                android:id="@+id/error_view"
+                layout="@layout/error_message"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginVertical="@dimen/medium_box_spaces"
+                android:maxHeight="120dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/last_update_text"
+                app:requestStatus="@{viewModel.requestState.status}" />
+
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/cards_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="sembuh_card, meninggal_card, kasus_card, last_update_text" />
 
             <include
                 android:id="@+id/sembuh_card"
@@ -104,14 +116,40 @@
                 bind:titleText="@{@string/kasus}"
                 bind:totalStatus="@{viewModel.totalGlobalCases.totalConfirmed}" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:padding="16dp"
-                app:layout_constraintTop_toBottomOf="@id/kasus_card"
-                tools:itemCount="6"
-                tools:listitem="@layout/country_status_holder" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/chart_line_card"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/box_size"
+                android:layout_margin="@dimen/medium_margin"
+                app:layout_constraintBottom_toTopOf="@id/chart_bar_card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/kasus_card">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/medium_margin" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/chart_bar_card"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/box_size"
+                android:layout_marginBottom="@dimen/medium_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/chart_line_card"
+                app:layout_constraintStart_toStartOf="@id/chart_line_card"
+                app:layout_constraintTop_toBottomOf="@id/chart_line_card">
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/chart_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/medium_margin" />
+            </androidx.cardview.widget.CardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
