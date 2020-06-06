@@ -27,8 +27,8 @@ class OverviewViewModel : ViewModel() {
     val totalGlobalCases: LiveData<GlobalCasesProperty> get() = _totalGlobalCases
 
     // total country cases LiveData
-    private val _totalCountryCases = MutableLiveData<List<CountryCasesProperty>>()
-    val totalCountryCases: LiveData<List<CountryCasesProperty>> get() = _totalCountryCases
+    private val _totalCountryCases = MutableLiveData<CountryCasesProperty>()
+    val totalCountryCases: LiveData<CountryCasesProperty> get() = _totalCountryCases
 
     private val _requestState = MutableLiveData<StatusProperty>()
     val requestState: LiveData<StatusProperty> get() = _requestState
@@ -42,10 +42,13 @@ class OverviewViewModel : ViewModel() {
                 _requestState.value = StatusProperty(RequestStatus.DONE)
 
                 _totalGlobalCases.value = result.Global
-                _totalCountryCases.value = result.Countries
+                for (item in result.Countries) {
+                    if (item.CountryCode == "ID") {
+                        _totalCountryCases.value = item
+                    }
+                }
             } catch (e: Exception) {
                 _requestState.value = StatusProperty(RequestStatus.ERROR, "Error: ${e.message}")
-                _totalCountryCases.value = listOf()
             }
         }
     }

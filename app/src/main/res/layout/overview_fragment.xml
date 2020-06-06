@@ -23,7 +23,7 @@
             <View
                 android:id="@+id/header"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="170dp"
                 android:background="@color/header"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -35,35 +35,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/medium_margin"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:text="@string/global"
+                android:text="@{viewModel.totalCountryCases.country}"
                 android:textColor="@android:color/white"
                 android:textSize="34sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/global" />
 
             <TextView
                 android:id="@+id/last_update_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dummy_last_update"
+                android:text="@{viewModel.totalCountryCases.date}"
                 android:textColor="@color/grey"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/global_status_text"
-                app:layout_constraintTop_toBottomOf="@id/global_status_text" />
+                app:layout_constraintTop_toBottomOf="@id/global_status_text"
+                tools:text="@string/dummy_last_update" />
 
             <include
                 android:id="@+id/error_view"
                 layout="@layout/error_message"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
                 android:layout_marginVertical="@dimen/medium_box_spaces"
                 android:maxHeight="120dp"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/header"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/last_update_text"
+                app:layout_constraintTop_toBottomOf="@id/header"
                 app:requestStatus="@{viewModel.requestState.status}" />
 
 
@@ -71,7 +72,8 @@
                 android:id="@+id/cards_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="sembuh_card, meninggal_card, kasus_card, last_update_text" />
+                app:constraint_referenced_ids="sembuh_card, meninggal_card, kasus_card, last_update_text, chart_bar_card, chart_line_card"
+                app:requestStatus="@{viewModel.requestState.status}" />
 
             <include
                 android:id="@+id/sembuh_card"
@@ -86,7 +88,7 @@
                 app:layout_constraintTop_toBottomOf="@id/last_update_text"
                 bind:sectionColor="@{@color/greenDark}"
                 bind:titleText="@{@string/sembuh}"
-                bind:totalStatus="@{viewModel.totalGlobalCases.totalRecovered}" />
+                bind:totalStatus="@{viewModel.totalCountryCases.totalRecovered}" />
 
             <include
                 android:id="@+id/meninggal_card"
@@ -99,7 +101,7 @@
                 app:layout_constraintTop_toTopOf="@id/sembuh_card"
                 bind:sectionColor="@{@color/greyDark}"
                 bind:titleText="@{@string/meninggal}"
-                bind:totalStatus="@{viewModel.totalGlobalCases.totalDeaths}" />
+                bind:totalStatus="@{viewModel.totalCountryCases.totalDeaths}" />
 
             <include
                 android:id="@+id/kasus_card"
@@ -114,7 +116,7 @@
                 app:layout_constraintTop_toBottomOf="@id/sembuh_card"
                 bind:sectionColor="@{@color/redDark}"
                 bind:titleText="@{@string/kasus}"
-                bind:totalStatus="@{viewModel.totalGlobalCases.totalConfirmed}" />
+                bind:totalStatus="@{viewModel.totalCountryCases.totalConfirmed}" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/chart_line_card"

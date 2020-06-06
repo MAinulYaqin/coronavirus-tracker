@@ -7,7 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/medium_margin"
-        tools:background="@color/header"
         tools:layout_height="150dp">
 
         <TextView
@@ -15,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no_connection_message"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toTopOf="@id/sub_message"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +25,6 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:text="@string/no_connection_sub_message"
-            android:textColor="@color/grey"
             app:layout_constraintBottom_toTopOf="@id/retry_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
