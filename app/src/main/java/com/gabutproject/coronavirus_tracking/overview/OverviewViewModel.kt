@@ -1,13 +1,10 @@
 package com.gabutproject.coronavirus_tracking.overview
 
-import android.util.Log
-import androidx.annotation.Nullable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gabutproject.coronavirus_tracking.network.CountryCasesProperty
-import com.gabutproject.coronavirus_tracking.network.Covid19Api
-import com.gabutproject.coronavirus_tracking.network.GlobalCasesProperty
+import com.gabutproject.coronavirus_tracking.network.*
+import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -22,34 +19,49 @@ class OverviewViewModel : ViewModel() {
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
     // Live data
-    // total global cases around the world
-    private val _totalGlobalCases = MutableLiveData<GlobalCasesProperty>()
-    val totalGlobalCases: LiveData<GlobalCasesProperty> get() = _totalGlobalCases
-
     // total country cases LiveData
-    private val _totalCountryCases = MutableLiveData<CountryCasesProperty>()
-    val totalCountryCases: LiveData<CountryCasesProperty> get() = _totalCountryCases
+    private val _totalCountryCases = MutableLiveData<TotalCountryCasesProperty>()
+    val totalCountryCases: LiveData<TotalCountryCasesProperty> get() = _totalCountryCases
+
+    // country map data, since i don't know how to call it
+    private val _countryCases = MutableLiveData<MutableList<Entry>>()
+    val countryCases: LiveData<MutableList<Entry>> get() = _countryCases
 
     private val _requestState = MutableLiveData<StatusProperty>()
     val requestState: LiveData<StatusProperty> get() = _requestState
+
+    private val countryCasesData = mutableListOf<Entry>()
 
     private fun getLatestCovid19Data() {
         // lunch on UI thread, since the fetch is already on the IO thread
         uiScope.launch {
             try {
                 _requestState.value = StatusProperty(RequestStatus.LOADING)
-                val result = Covid19Api.retrofitService.getLatestCovidData()
+                val totalGlobalCases = Covid19Api.retrofitService.getLatestCovidData()
+                val countryMapData = Covid19Api.retrofitService.getCovidMapData()
                 _requestState.value = StatusProperty(RequestStatus.DONE)
 
-                _totalGlobalCases.value = result.Global
-                for (item in result.Countries) {
-                    if (item.CountryCode == "ID") {
-                        _totalCountryCases.value = item
-                    }
-                }
+                setData(totalGlobalCases, countryMapData)
+                _countryCases.value = countryCasesData
             } catch (e: Exception) {
-                _requestState.value = StatusProperty(RequestStatus.ERROR, "Error: ${e.message}")
+                _requestState.value = StatusProperty(RequestStatus.ERROR, "${e.message}")
             }
+        }
+    }
+
+    private suspend fun setData(
+        totalGlobalCases: SummaryProperty,
+        countryMapData: List<CountryCasesProperty>
+    ) {
+        // set values
+        totalGlobalCases.Countries.forEach { item ->
+            if (item.CountryCode == "ID") _totalCountryCases.value = item
+        }
+
+        var date = countryMapData[0].Date.substring(8, 10).toInt()
+        countryMapData.forEach { item ->
+            countryCasesData.add(Entry(date.toFloat(), item.Deaths.toFloat()))
+            date++
         }
     }
 
