@@ -24,13 +24,16 @@ class OverviewViewModel : ViewModel() {
     val totalCountryCases: LiveData<TotalCountryCasesProperty> get() = _totalCountryCases
 
     // country map data, since i don't know how to call it
-    private val _countryCases = MutableLiveData<MutableList<Entry>>()
-    val countryCases: LiveData<MutableList<Entry>> get() = _countryCases
+    private val _countryCases = MutableLiveData<MutableList<List<Entry>>>()
+    val countryCases: LiveData<MutableList<List<Entry>>> get() = _countryCases
 
     private val _requestState = MutableLiveData<StatusProperty>()
     val requestState: LiveData<StatusProperty> get() = _requestState
 
+    // list of Entries to pass into the chart
     private val countryCasesData = mutableListOf<Entry>()
+    private val countryDeathData = mutableListOf<Entry>()
+    private val countryRecoveredData = mutableListOf<Entry>()
 
     private fun getLatestCovid19Data() {
         // lunch on UI thread, since the fetch is already on the IO thread
@@ -42,14 +45,13 @@ class OverviewViewModel : ViewModel() {
                 _requestState.value = StatusProperty(RequestStatus.DONE)
 
                 setData(totalGlobalCases, countryMapData)
-                _countryCases.value = countryCasesData
             } catch (e: Exception) {
                 _requestState.value = StatusProperty(RequestStatus.ERROR, "${e.message}")
             }
         }
     }
 
-    private suspend fun setData(
+    private fun setData(
         totalGlobalCases: SummaryProperty,
         countryMapData: List<CountryCasesProperty>
     ) {
@@ -60,9 +62,15 @@ class OverviewViewModel : ViewModel() {
 
         var date = countryMapData[0].Date.substring(8, 10).toInt()
         countryMapData.forEach { item ->
-            countryCasesData.add(Entry(date.toFloat(), item.Deaths.toFloat()))
+            val currentDate = date.toFloat()
+            countryCasesData.add(Entry(currentDate, item.Confirmed.toFloat()))
+            countryRecoveredData.add(Entry(currentDate, item.Recovered.toFloat()))
+            countryDeathData.add(Entry(currentDate, item.Deaths.toFloat()))
             date++
         }
+
+        _countryCases.value =
+            mutableListOf(countryCasesData, countryRecoveredData, countryDeathData)
     }
 
     init {

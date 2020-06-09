@@ -1,9 +1,9 @@
 package com.gabutproject.coronavirus_tracking.overview
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.gabutproject.coronavirus_tracking.R
@@ -42,62 +42,57 @@ class OverviewFragment : Fragment() {
             viewModel.retryConnection()
         }
 
-        testChartInit()
+        // init totalCasesChart
         totalCasesChart()
 
         // return view
         return binding.root
     }
 
-
-    private fun testChartInit() {
-        val chartView = binding.chartBar
-        val entries1: List<BarEntry> =
-            listOf(BarEntry(0f, 4f), BarEntry(1f, 1f), BarEntry(2f, 3f))
-        val entries2: List<BarEntry> =
-            listOf(BarEntry(0f, 4f), BarEntry(1f, 5f), BarEntry(2f, 5f))
-
-        val group1 = BarDataSet(entries1, "batman")
-        val group2 = BarDataSet(entries2, "madman")
-
-        group2.color = Color.GRAY
-
-        val data = BarData(group1, group2)
-
-        chartView.animateXY(2000, 2000)
-
-        val groupSpace = 0.06f
-        val barSpace = 0.02f
-        val barWith = 0.45f
-
-        data.barWidth = barWith
-        chartView.data = data
-        chartView.groupBars(-0.5f, groupSpace, barSpace)
-        // (0.02 + 0.45) * 2 = 94 + 6
-    }
-
-    private fun totalCasesChart(entries: MutableList<Entry> = mutableListOf()) {
+    private fun totalCasesChart(
+        casesEntries: List<Entry> = listOf(),
+        recoveredEntries: List<Entry> = listOf(),
+        deathEntries: List<Entry> = listOf()
+    ) {
         val chartView = binding.chartLine
         val xAxisFormatter: ValueFormatter = DayAxisValueFormatter(chartView)
-        val data = chartView.data
         val xAxis = chartView.xAxis
+        val casesDataSet = LineDataSet(casesEntries, "Kasus")
+        val deathDataSet = LineDataSet(deathEntries, "Meninggal")
+        val recoveredDataSet = LineDataSet(recoveredEntries, "Sembuh")
+
+        val data = chartView.data
+        val lineData = LineData(casesDataSet, recoveredDataSet, deathDataSet)
 
         // some adjustments
         xAxis.granularity = 1f
         xAxis.labelCount = 5
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.valueFormatter = xAxisFormatter
+        // make the right YAxis gone,
+        chartView.axisRight.isEnabled = false
+        // width
+        casesDataSet.lineWidth = 4f
+        recoveredDataSet.lineWidth = 4f
+        deathDataSet.lineWidth = 4f
+        // draw circles
+        casesDataSet.setDrawCircles(false)
+        recoveredDataSet.setDrawCircles(false)
+        deathDataSet.setDrawCircles(false)
+        // color
+        casesDataSet.color = ContextCompat.getColor(requireContext(), R.color.pink)
+        recoveredDataSet.color = ContextCompat.getColor(requireContext(), R.color.green)
+        deathDataSet.color = ContextCompat.getColor(requireContext(), R.color.grey)
 
         if (chartView.data == null) {
-            chartView.data = LineData()
+            chartView.data = lineData
         } else {
-            val lineDataSet = LineDataSet(entries, "Death")
+            // line styling
+            lineData.dataSets.forEach { line -> line.setDrawValues(false) }
 
-            lineDataSet.setDrawCircles(false)
-            lineDataSet.setDrawValues(false)
-            lineDataSet.lineWidth = 4f
-
-            data.addDataSet(lineDataSet)
+            // update dataSet
+            // tell the chart if the data has changed
+            chartView.data = lineData
             data.notifyDataChanged()
             chartView.notifyDataSetChanged()
             chartView.invalidate()
@@ -111,7 +106,7 @@ class OverviewFragment : Fragment() {
 
     // update data listener
     private fun updateLiveData() {
-        // request state handler
+        // request state listener
         viewModel.requestState.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it.status == RequestStatus.ERROR) {
@@ -120,9 +115,10 @@ class OverviewFragment : Fragment() {
             }
         })
 
+        // chart data listener
         viewModel.countryCases.observe(viewLifecycleOwner, Observer {
             it?.let {
-                totalCasesChart(it)
+                totalCasesChart(it[0], it[1], it[2])
             }
         })
     }
