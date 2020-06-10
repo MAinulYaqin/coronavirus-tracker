@@ -54,9 +54,13 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
 
     // retrofit | http/s handler
+    def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 
     // converter-moshi | json parser
+    def moshi_version = '2.9.0'
+    def moshi_kotlin_version = '1.9.2'
+
     implementation "com.squareup.retrofit2:converter-moshi:$moshi_version"
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_kotlin_version"
     kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshi_kotlin_version")
@@ -65,5 +69,6 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
     // MPChart
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    def mpchart_version = 'v3.1.0'
+    implementation "com.github.PhilJay:MPAndroidChart:$mpchart_version"
 }

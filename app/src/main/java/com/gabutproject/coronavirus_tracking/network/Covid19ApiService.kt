@@ -9,7 +9,14 @@ import retrofit2.http.GET
 // Api Urls
 private const val BASE_URL = "https://api.covid19api.com/"
 private const val SUMMARY = "summary"
-private const val COUNTRY_MAP = "total/dayone/country/" // :param country-slug, e.g. /country/indonesia
+
+// :path country-slug, e.g. /country/indonesia
+// returns list of data from dayOne - current
+private const val COUNTRY_MAP = "total/dayone/country/"
+
+// :path country-slug, e.g. /total/country/indonesia
+// returns list of data from dayOne - current, take the last data for total
+private const val COUNTRY_SUMMARY = "total/country/"
 
 // Http Request handler
 private val moshi = Moshi.Builder()

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            style="@style/header_style"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/header_title"
+            style="@style/h1"
+            android:text="@string/app_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/header_sub_title"
+            style="@style/sub_header"
+            android:text="@string/made_by"
+            app:layout_constraintStart_toStartOf="@id/header_title"
+            app:layout_constraintTop_toBottomOf="@id/header_title" />
+
+        <include
+            layout="@layout/status_card"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/box_size"
+            android:layout_margin="@dimen/medium_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_sub_title"
+            bind:about="hello"
+            bind:isAbout="true"
+            bind:titleText="about" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
