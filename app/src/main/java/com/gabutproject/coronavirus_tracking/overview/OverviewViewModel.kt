@@ -1,5 +1,6 @@
 package com.gabutproject.coronavirus_tracking.overview
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -59,13 +60,34 @@ class OverviewViewModel : ViewModel() {
         totalGlobalCases.Countries.forEach { item ->
             if (item.CountryCode == "ID") _totalCountryCases.value = item
         }
-
+        // chart only accept 1..30, 31, 32 and reformat it to date with initial month
+        // so init date here and update it with increased value
         var date = countryMapData[0].Date.substring(8, 10).toInt()
-        countryMapData.forEach { item ->
+        countryMapData.forEachIndexed { index, item ->
+            // prevData default value is 0 to prevent outOfBound index if defined as index - 1
+            // if index == 0 & index - 1 it will cause error
+            var prevCases = 0
+            var prevRecovered = 0
+            var prevDeath = 0
+
+            if (index != 0) {
+                // update data with the prevData,
+                val prevData = countryMapData[index - 1]
+                prevCases = prevData.Confirmed
+                prevRecovered = prevData.Recovered
+                prevDeath = prevData.Deaths
+            }
+
+            // prevData contains total of all of the previous data, and so the currentData
+            // the last, minus currentData with prevData to get daily change
             val currentDate = date.toFloat()
-            countryCasesData.add(Entry(currentDate, item.Confirmed.toFloat()))
-            countryRecoveredData.add(Entry(currentDate, item.Recovered.toFloat()))
-            countryDeathData.add(Entry(currentDate, item.Deaths.toFloat()))
+            val currentCases = item.Confirmed.minus(prevCases).toFloat()
+            val currentRecovered = item.Recovered.minus(prevRecovered).toFloat()
+            val currentDeath = item.Deaths.minus(prevDeath).toFloat()
+
+            countryCasesData.add(Entry(currentDate, currentCases))
+            countryRecoveredData.add(Entry(currentDate, currentRecovered))
+            countryDeathData.add(Entry(currentDate, currentDeath))
             date++
         }
 

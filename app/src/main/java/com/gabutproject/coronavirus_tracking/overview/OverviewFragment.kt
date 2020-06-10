@@ -96,6 +96,8 @@ class OverviewFragment : Fragment() {
             data.notifyDataChanged()
             chartView.notifyDataSetChanged()
             chartView.invalidate()
+
+            chartView.animateXY(2000, 2000)
         }
     }
 
