@@ -68,7 +68,7 @@ class OverviewViewModel : ViewModel() {
             // if index == 0 & index - 1 it will cause error
             var prevCases = 0
             var prevRecovered = 0
-            var prevDeath = 0
+             var prevDeath = 0
 
             if (index != 0) {
                 // update data with the prevData,

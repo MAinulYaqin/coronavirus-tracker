@@ -36,4 +36,27 @@
         <item name="android:padding">5dp</item>
     </style>
 
+    <style name="header_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/header_height</item>
+        <item name="android:background">@color/header</item>
+    </style>
+
+    <style name="h1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/medium_margin</item>
+        <item name="android:layout_marginTop">@dimen/medium_margin</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="sub_header">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

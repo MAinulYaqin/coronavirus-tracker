@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.gabutproject.coronavirus_tracking.R
 import com.gabutproject.coronavirus_tracking.databinding.OverviewFragmentBinding
 import com.gabutproject.coronavirus_tracking.utils.DayAxisValueFormatter
@@ -101,11 +103,6 @@ class OverviewFragment : Fragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.overview_overflow_menu, menu)
-    }
-
     // update data listener
     private fun updateLiveData() {
         // request state listener
@@ -123,5 +120,18 @@ class OverviewFragment : Fragment() {
                 totalCasesChart(it[0], it[1], it[2])
             }
         })
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overview_overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            requireView().findNavController()
+        ) || super.onOptionsItemSelected(item)
     }
 }
