@@ -72,7 +72,7 @@
                 android:id="@+id/cards_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="sembuh_card, meninggal_card, kasus_card, last_update_text, chart_bar_card, chart_line_card"
+                app:constraint_referenced_ids="sembuh_card, meninggal_card, kasus_card, last_update_text, chart_line_card"
                 app:requestStatus="@{viewModel.requestState.status}" />
 
             <include
@@ -121,35 +121,38 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/chart_line_card"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/box_size"
+                android:layout_height="@dimen/medium_box_size"
                 android:layout_margin="@dimen/medium_margin"
-                app:layout_constraintBottom_toTopOf="@id/chart_bar_card"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/kasus_card">
 
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/chart_line"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/medium_margin" />
-            </androidx.cardview.widget.CardView>
+                    android:padding="@dimen/medium_margin">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/chart_bar_card"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/box_size"
-                android:layout_marginBottom="@dimen/medium_margin"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/chart_line_card"
-                app:layout_constraintStart_toStartOf="@id/chart_line_card"
-                app:layout_constraintTop_toBottomOf="@id/chart_line_card">
+                    <TextView
+                        android:id="@+id/title_textview"
+                        style="@style/status_card_title_text"
+                        android:text="@string/statistik"
+                        app:layout_constraintBottom_toTopOf="@id/chart_line"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/statistik" />
 
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/chart_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/medium_margin" />
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chart_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/title_textview" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
