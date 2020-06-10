@@ -13,4 +13,10 @@
     <string name="dummy_last_update">Last update 1 hour ago</string>
     <string name="statistik">STATISTIK</string>
     <string name="made_by">v0.1 | Made by Ainul</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>
