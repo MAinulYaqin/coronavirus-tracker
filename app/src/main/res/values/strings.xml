@@ -12,5 +12,16 @@
     <string name="no_connection_sub_message">Please check your internet connection again</string>
     <string name="dummy_last_update">Last update 1 hour ago</string>
     <string name="statistik">STATISTIK</string>
-    <string name="made_by">v0.1 | Made by Ainul</string>
+    <string name="made_by">v0.1 | made by Ainul</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="star_on_github">Star on Github</string>
+    <string name="library_used">Library used</string>
+    <string name="license">License</string>
+    <string name="links">LINKS</string>
+    <string name="data_provider">Data provider</string>
 </resources>
