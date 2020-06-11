@@ -2,10 +2,12 @@
 <resources>
     <dimen name="elevation">2dp</dimen>
 
+    <dimen name="item_icon_size">24dp</dimen>
     <dimen name="box_size">100dp</dimen>
     <dimen name="medium_box_size">300dp</dimen>
 
     <dimen name="padding">8dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
     <dimen name="medium_margin">16dp</dimen>
     <dimen name="medium_box_spaces">16dp</dimen>
     <dimen name="header_height">170dp</dimen>

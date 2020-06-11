@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_margin="@dimen/medium_margin"
+    tools:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/medium_margin">
+
+        <TextView
+            android:id="@+id/title_textview"
+            style="@style/status_card_title_text"
+            android:layout_margin="@dimen/medium_margin"
+            android:text="@string/links"
+            tools:text="STATUS" />
+
+        <LinearLayout
+            android:id="@+id/star_github_item"
+            style="@style/clickable_item_card">
+
+            <ImageView
+                android:src="@drawable/ic_star_24dp"
+                style="@style/item_icon" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Subhead.cardItem"
+                android:text="@string/star_on_github" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/library_used_item"
+            style="@style/clickable_item_card">
+
+            <ImageView
+                style="@style/item_icon"
+                android:src="@drawable/ic_code_24dp" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Subhead.cardItem"
+                android:text="@string/library_used" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/api_item"
+            style="@style/clickable_item_card">
+
+            <ImageView
+                style="@style/item_icon"
+                android:src="@drawable/ic_language_24dp" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Subhead.cardItem"
+                android:text="@string/data_provider" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/license_item"
+            style="@style/clickable_item_card">
+
+            <ImageView
+                style="@style/item_icon"
+                android:src="@drawable/ic_license_24dp" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Subhead.cardItem"
+                android:text="@string/license" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

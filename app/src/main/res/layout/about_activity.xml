@@ -29,53 +29,15 @@
             app:layout_constraintStart_toStartOf="@id/header_title"
             app:layout_constraintTop_toBottomOf="@id/header_title" />
 
-        <androidx.cardview.widget.CardView
+        <include
+            android:id="@+id/about_card"
+            layout="@layout/about_app_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/medium_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header_sub_title">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/medium_margin">
-
-                <TextView
-                    android:id="@+id/title_textview"
-                    style="@style/status_card_title_text"
-                    android:layout_margin="@dimen/medium_margin"
-                    android:text="@string/about"
-                    tools:text="STATUS" />
-
-                <LinearLayout
-                    android:id="@+id/start_github_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:clickable="true"
-                    android:paddingHorizontal="@dimen/medium_margin"
-                    android:paddingVertical="@dimen/medium_margin">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/ic_launcher_background" />
-
-                    <TextView
-                        style="@style/TextAppearance.AppCompat.Subhead"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/star_on_github" />
-
-                </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toBottomOf="@id/header_sub_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
