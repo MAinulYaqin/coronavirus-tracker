@@ -9,6 +9,16 @@ ___
 ### Data Provider
 the data used on this app is provided and managed by [covid19api](https://covid19api.com/), a free simple to use coronavirus-tracker api
 
+
+___
+### Installing
+you can download this repository manually or clone with
+<br />
+````sh
+$ git clone https://github.com/ai-null/coronavirus-tracker.git
+````
+after that simply open in android studio, wait for build and you're all set.
+
 ___
 ### Depedencies
 a list of libraries used on this app
