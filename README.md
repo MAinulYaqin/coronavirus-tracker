@@ -1,12 +1,9 @@
 # coronavirus-tracker
+this is just a simple coronavirus tracker mobile app made with kotlin
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/ai-null/coronavirus-tracker/dev/screenshots/demo.gif" height="400px" />
 </p>
-
-___
-### Description
-this is just a simple coronavirus tracker mobile app made with kotlin
 
 ___
 ### Data Provider
