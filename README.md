@@ -7,7 +7,9 @@ this is just a simple coronavirus tracker mobile app made with kotlin
 
 ___
 ### Data Provider
-the data used on this app is provided and managed by [covid19api](https://covid19api.com/), a free simple to use coronavirus-tracker api
+the data used on this app is provided and managed by __[covid19api](https://covid19api.com/)__.
+<br />
+Since the API provider getting a lot of request, the API is now paid service. And since i don't subscribe to the API, this application might not working
 
 
 ___
