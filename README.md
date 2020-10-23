@@ -13,7 +13,7 @@ Since the API provider getting a lot of request, the API is now paid service. An
 
 
 ___
-### Installing
+### Workaround
 you can download this repository manually or clone with
 <br />
 ````sh
